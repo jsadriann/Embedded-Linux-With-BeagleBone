@@ -1,0 +1,32 @@
+#Install and configuration Server TFTP
+1) Antes de tudo certifique-se que o sistema esta atualizado, faça:
+#sudo apt-get update
+#sudo apt-get upgrade
+#sudo apt-get dist-upgrade
+#sudo apt-get install -f
+#sudo apt-get autoremove
+2) Criar e configurar o diretorio que será utilizado pelo servidor, faça:
+#sudo mkdir /home/tftp
+#sudo chown tftp:nogroup /home/tftp
+#sudo chmod -R 755 /home/tftp
+#sudo chmod -R +s /home/tftp
+#sudo chmod -R g+w /home/tftp
+3) instale o serviço Daemon do TFTP, faça:
+#sudo apt-get install tftpd-hpa
+4) abra o arquivo de configuração "tftpd-hpa" do tftp, encontrado no caminho
+"/etc/default", faça:
+#sudo nano /etc/default/tftpd-hpa
+4.1) altere o valor da variavel "TFTP-DIRECTORY" de acordo com o diretorio
+criado no passo dois, faça:
+#TFTP-DIRECTORY="/home/tftp"
+4.2) altere a variavel "TFTP-ADDRESS" de acordo com o IP do servidor e
+a porta de comunicação,faça:
+#ex.: 
+#TFTP-ADDRESS="10.10.0.1:69"
+4.3) opcional, adicione a opção "-create" na variavel "TFTP-OPTIONS", faça:
+#TFTP-OPTIONS="--secure --create"
+5) agora reinicie o serviço tftp para que as configurações feitas possam
+ser observadas pelo daemon do tftp, faça:
+#service tftpd-hpa restart 
+6) caso queira verificar o resultado, faça:
+#service tftpd-hpa restart
